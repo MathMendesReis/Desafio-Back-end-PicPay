@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.develop.app.modules.user.UserEntity;
+import com.develop.app.modules.user.dto.CreateUserRequestDTO;
 import com.develop.app.modules.user.service.CreateUserUseCase;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -29,12 +30,19 @@ public class UserController {
   @Operation(summary = "Cadastro de usuario.", description = "essa função e responsavel por cadastrar usuarios")
   @ApiResponses({
     @ApiResponse(responseCode = "200", content = {
-      @Content(schema = @Schema(implementation = UserEntity.class))
+      @Content(schema = @Schema(implementation = CreateUserRequestDTO.class))
     })
   })
-  public ResponseEntity<Object> create (@Valid @RequestBody UserEntity userEntity){
+  public ResponseEntity<Object> create (@Valid @RequestBody CreateUserRequestDTO createUserRequestDTO){
     try {
-      this.createUserUseCase.execute(userEntity);
+      UserEntity user = UserEntity.builder()
+      .userName(createUserRequestDTO.userName())
+      .cpf(createUserRequestDTO.cpf())
+      .email(createUserRequestDTO.email())
+      .password(createUserRequestDTO.password())
+      .typeUser(createUserRequestDTO.typeUser())
+      .build();
+      this.createUserUseCase.execute(user);
       return ResponseEntity.ok().body("sucesso");
     } catch (Exception e) {
       return ResponseEntity.badRequest().body(e.getMessage());
