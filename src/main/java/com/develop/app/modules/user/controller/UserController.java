@@ -34,7 +34,8 @@ public class UserController {
   })
   public ResponseEntity<Object> create (@Valid @RequestBody UserEntity userEntity){
     try {
-      return ResponseEntity.ok().body(userEntity);
+      this.createUserUseCase.execute(userEntity);
+      return ResponseEntity.ok().body("sucesso");
     } catch (Exception e) {
       return ResponseEntity.badRequest().body(e.getMessage());
     }
