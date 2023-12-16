@@ -2,12 +2,12 @@ version: '3.8'
 
 services:
   postgres:
-    container_name: PICKPAY
+    container_name: pic_pay_postgres
     image: postgres
     ports:
       - 5432:5432
     environment:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=admin
-      - POSTGRES_DB= PICKPAY_DB
-      
+      - POSTGRES_DB=pic_pay
+       
