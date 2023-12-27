@@ -10,4 +10,5 @@ import com.develop.app.modules.user.UserEntity;
 public interface UserRepository extends JpaRepository<UserEntity, UUID> {
   Optional <UserEntity> findByEmail( String email);
   Optional <UserEntity> findByCpf( String cpf);
+  Optional <UserEntity> findAllById(UUID sendId);
 }

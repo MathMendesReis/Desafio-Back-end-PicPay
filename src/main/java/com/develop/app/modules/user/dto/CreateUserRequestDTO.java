@@ -1,5 +1,6 @@
 package com.develop.app.modules.user.dto;
 
+
 import org.hibernate.validator.constraints.Length;
 
 import com.develop.app.modules.user.TypeUser;
@@ -33,6 +34,7 @@ public record CreateUserRequestDTO(
   @Enumerated(EnumType.STRING)
   @Schema(example = "COMMON", requiredMode = RequiredMode.REQUIRED, description = "role do usuario que pode ser COMMON ou SHOPKEEPERS")
   TypeUser typeUser
+
 ) {
   
 }

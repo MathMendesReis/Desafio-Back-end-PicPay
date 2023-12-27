@@ -1,5 +1,6 @@
 package com.develop.app.modules.user;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -29,7 +30,7 @@ public class UserEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
-
+  
   private String userName;
 
   private String cpf;
@@ -44,5 +45,8 @@ public class UserEntity {
   @CreatedDate
   @JsonIgnore
   private LocalDateTime createdAt;
+
+  @Builder.Default
+  private BigDecimal walletBalance = BigDecimal.ZERO;
 }
   
