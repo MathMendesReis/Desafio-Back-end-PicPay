@@ -11,17 +11,21 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableMethodSecurity
 public class SecurityConfig {
-    private static final String[] PERMIT_ALL_LIST = {
+    private static final String[] PERMIT_ALL_LIST_SWAGGER = {
       "/swagger-ui/**",
       "/v3/api-docs/**",
       "/swagger-resource/**",
-      "/actuator/**"
+      "/actuator/**",
+  };
+    private static final String[] PERMIT_ALL_LIST = {
+      "/**"
   };
 
   @Bean
   SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http.csrf(csrf -> csrf.disable())
         .authorizeHttpRequests(auth -> {
+          auth.requestMatchers(PERMIT_ALL_LIST_SWAGGER).permitAll();
           auth.requestMatchers(PERMIT_ALL_LIST).permitAll();
           auth.anyRequest().authenticated();
         });
